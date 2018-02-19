@@ -43,3 +43,5 @@ $ source venv/bin/activate
 ```
 $ pip install [package]
 ```
+
+#### Restore packages
