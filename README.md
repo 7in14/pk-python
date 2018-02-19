@@ -1,4 +1,4 @@
-# About
+# About [![Build Status](https://travis-ci.org/7in14/pk-python.svg?branch=master)](https://travis-ci.org/7in14/pk-python)
 Simple python web app built with flask
 
 ## To run with flask
