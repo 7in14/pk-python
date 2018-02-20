@@ -3,7 +3,10 @@ default: build
 build: install test
 
 test:
-	pytest
+	py.test --cov-report html:cov_html
+        --cov-report xml:cov.xml
+        --cov-report annotate:cov_annotate
+        --cov=myproj tests/
 
 install:
 	pip3 install -r requirements.txt
@@ -12,7 +15,7 @@ save:
 	pipreqs . --force
 
 setup:
-	pip3 install pipreqs pytest
+	pip3 install pipreqs pytest pytest-cov
 
 venv:
 	pip3 install virtualenv
