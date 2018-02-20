@@ -1,8 +1,8 @@
 language: python
 python:
-    - "3.6"
+  - "3.6"
 script:
-    - make test
+  - make test
 
 machine:
   environment:
@@ -14,6 +14,7 @@ dependencies:
     - chmod +x ./cc-test-reporter
 
 test:
+  pre:
     - make setup
     - ./cc-test-reporter before-build
 
