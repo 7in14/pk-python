@@ -20,4 +20,5 @@ venv:
 	source venv/bin/activate
 
 run:
+	export FLASK_DEBUG=1
 	python hello.py

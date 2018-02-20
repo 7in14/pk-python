@@ -6,3 +6,4 @@ app = Flask(__name__)
 from app import routes
 from app import ping
 from app import file
+from app import crime
