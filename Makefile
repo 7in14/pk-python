@@ -3,7 +3,7 @@ default: build
 build: install test
 
 test:
-	pytest
+	pytest --cov-report xml:coverage.xml --cov=app
 
 install:
 	pip3 install -r requirements.txt
@@ -12,7 +12,7 @@ save:
 	pipreqs . --force
 
 setup:
-	pip3 install pipreqs pytest
+	pip3 install pipreqs pytest pytest-cov
 
 venv:
 	pip3 install virtualenv

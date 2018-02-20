@@ -1,5 +1,21 @@
-  language: python
-  python:
+language: python
+python:
     - "3.6"
-  script:
-    - pytest
+script:
+    - make test
+
+machine:
+  environment:
+    CC_TEST_REPORTER_ID: bfc98f8910d9c8ff9c6da31188d83b3c49f084f466c621e6eb1e71a4cdac7d4e
+
+dependencies:
+  post:
+    - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+    - chmod +x ./cc-test-reporter
+
+test:
+    - make setup
+    - ./cc-test-reporter before-build
+
+  post:
+    - ./cc-test-reporter after-build --exit-code $EXIT_CODE
