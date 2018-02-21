@@ -3,10 +3,7 @@ default: build
 build: install test
 
 test:
-	py.test --cov-report html:cov_html
-        --cov-report xml:cov.xml
-        --cov-report annotate:cov_annotate
-        --cov=myproj tests/
+	pytest --cov-report xml:coverage.xml --cov=app
 
 install:
 	pip3 install -r requirements.txt

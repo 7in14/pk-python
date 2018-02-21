@@ -1,4 +1,4 @@
-# About [![Build Status](https://travis-ci.org/7in14/pk-python.svg?branch=master)](https://travis-ci.org/7in14/pk-python)
+# About [![Build Status](https://travis-ci.org/7in14/pk-python.svg?branch=master)](https://travis-ci.org/7in14/pk-python) [![Maintainability](https://api.codeclimate.com/v1/badges/26029d757952f052d146/maintainability)](https://codeclimate.com/github/7in14/pk-python/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/26029d757952f052d146/test_coverage)](https://codeclimate.com/github/7in14/pk-python/test_coverage)
 Simple python web app built with flask
 
 ## To run with flask

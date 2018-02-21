@@ -27,6 +27,10 @@ class AppTestCase(unittest.TestCase):
 
         self.assertIn(b'Simple python web app built with flask', response.data)
 
+    def test_crime(self):
+        response = self.app.get('/raleigh/crime')
+
+        self.assertEqual(200, response.status_code)
 
 if __name__ == '__main__':
     unittest.main()
