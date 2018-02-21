@@ -14,4 +14,15 @@ def crime():
 
     r = requests.get('https://data.raleighnc.gov/resource/3bhm-we7a.json')
     json = r.json()
-    return jsonify(json)
+
+    # filter list
+    filtered = list(filterbyvalue(json, query))
+
+    return jsonify(filtered)
+
+def filterbyvalue(seq, value):
+   for el in seq:
+       if not value or value in el['lcr_desc']:
+          if 'location' in el: del el['location']
+          if 'inc_no' in el: del el['inc_no']      
+          yield el
