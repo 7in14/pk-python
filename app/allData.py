@@ -14,6 +14,7 @@ data = [
     }
 ]
 
+
 @app.route('/allData')
 def get_allData():
 

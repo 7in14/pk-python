@@ -12,7 +12,7 @@ data = [
     }
 ]
 
-@app.route('/dataSources')
 
+@app.route('/dataSources')
 def get_dataSources():
     return jsonify(data)

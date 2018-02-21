@@ -1,5 +1,5 @@
 from app import app
-from flask import jsonify,abort
+from flask import jsonify, abort
 
 @app.route('/dataSource/<string:id>', methods=['DELETE'])
 

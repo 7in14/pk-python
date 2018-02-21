@@ -1,6 +1,6 @@
 from app import app
 
-@app.route('/ping')
 
+@app.route('/ping')
 def ping():
     return "pong"
