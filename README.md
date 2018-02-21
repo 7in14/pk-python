@@ -1,4 +1,4 @@
-# About [![Build Status](https://travis-ci.org/7in14/pk-python.svg?branch=master)](https://travis-ci.org/7in14/pk-python) [![Maintainability](https://api.codeclimate.com/v1/badges/26029d757952f052d146/maintainability)](https://codeclimate.com/github/7in14/pk-python/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/26029d757952f052d146/test_coverage)](https://codeclimate.com/github/7in14/pk-python/test_coverage)
+# About [![Build Status](https://travis-ci.org/7in14/pk-python.svg?branch=master)](https://travis-ci.org/7in14/pk-python) [![Maintainability](https:/.codeclimate.com/v1/badges/26029d757952f052d146/maintainability)](https://codeclimate.com/github/7in14/pk-python/maintainability) [![Test Coverage](https:/.codeclimate.com/v1/badges/26029d757952f052d146/test_coverage)](https://codeclimate.com/github/7in14/pk-python/test_coverage)
 Simple python web app built with flask
 
 ## To run with flask
@@ -56,34 +56,34 @@ $ pip3 install -r requirements.txt
 # API
 ## ping
 ```
-$ curl .:8080/api/ping
+$ curl .:5000/ping
 ```
 
 ## Read all data sources
 ```
-$ curl .:8080/api/dataSources
+$ curl .:5000/dataSources
 ```
 
 ## Read one data source
 ```
-$ curl .:8080/api/dataSource/[guid]
+$ curl .:5000/dataSource/[guid]
 ```
 
 ## Delete data source
 ```
-$ curl -X 'DELETE' .:8080/api/dataSource/[guid]
+$ curl -X 'DELETE' .:5000/dataSource/[guid]
 ```
 ## Add data source
 ```
-$ curl -X 'PUT' .:8080/api/dataSource -d '{"name":"new", "url":"http://google.com"}' -H 'content-type: application/json'
+$ curl -X 'PUT' .:5000/dataSource -d '{"name":"new", "url":"http://google.com"}' -H 'content-type: application/json'
 ```
 
 ## Get crimes
 ```
-curl ".:8080/api/raleigh/crime?query=Drug"
+curl ".:5000/raleigh/crime?query=Drug"
 ```
 
 ## Get all data - from data sources
 ```
-curl .:8080/api/allData
+curl .:5000/allData
 ```

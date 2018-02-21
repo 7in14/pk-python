@@ -1,6 +1,5 @@
 from app import app
-from flask import request
-from flask import jsonify
+from flask import request, jsonify
 import requests
 
 # GET /raleigh/crime?query=<q> JSON
@@ -24,5 +23,5 @@ def filterbyvalue(seq, value):
    for el in seq:
        if not value or value in el['lcr_desc']:
           if 'location' in el: del el['location']
-          if 'inc_no' in el: del el['inc_no']      
+          if 'inc_no' in el: del el['inc_no']
           yield el
