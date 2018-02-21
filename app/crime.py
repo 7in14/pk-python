@@ -23,8 +23,6 @@ def crime():
 def filterbyvalue(seq, value):
     for el in seq:
         if not value or value in el['lcr_desc']:
-            if 'location' in el:
-                del el['location']
-            if 'inc_no' in el:
-                del el['inc_no']
+            el.pop('location', None)
+            el.pop('inc_no', None)
             yield el
