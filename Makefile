@@ -3,7 +3,7 @@ default: build
 build: install test
 
 test:
-	pytest --cov-report xml:coverage.xml --cov=app
+	pytest -v -s --cov-report xml:coverage.xml --cov=app
 
 install:
 	pip3 install -r requirements.txt
