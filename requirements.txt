@@ -1,2 +1,4 @@
-Flask==0.12.2
+pymongo==3.6.0
+Flask_PyMongo==0.5.1
 requests==2.18.4
+Flask==0.12.2
