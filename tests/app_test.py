@@ -43,6 +43,11 @@ class AppTestCase(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
 
+    def test_getDataSource_no_id(self):
+        response = self.app.get('/dataSource/')
+
+        self.assertEqual(response.status_code, 404)
+
 
 if __name__ == '__main__':
     unittest.main()
