@@ -7,8 +7,6 @@ from bson.objectid import ObjectId
 
 @app.route('/dataSource/<string:id>')
 def get_data_source(id):
-    if not id:
-        abort(404)
 
     source = get_mongo().db.dataSources.find_one_or_404(ObjectId(id))
     return JSONEncoder.JSONEncoder().encode(source)
