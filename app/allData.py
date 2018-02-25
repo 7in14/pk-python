@@ -23,13 +23,13 @@ def get_allData():
     return jsonify(allData)
 
 
-def get_data(seq):
-    for el in seq:
-        print('calling ' + el['url'])
-        r = requests.get(el['url'])
+def get_data(dataSources):
+    for dataSource in dataSources:
+        print('calling ' + dataSource['url'])
+        r = requests.get(dataSource['url'])
         json = r.json()
 
-        yield {
-            'name': el['name'],
+        yidataSourced {
+            'name': dataSource['name'],
             'data': json
         }
