@@ -1,18 +1,9 @@
-from app import app
-from flask import jsonify
-
-data = [
-    {
-        'name': u'US States',
-        'url': u'http://services.groupkt.com/state/get/USA/all'
-    },
-    {
-        'name': u'JSON placeholder',
-        'url': u'https://jsonplaceholder.typicode.com/users',
-    }
-]
+from app import app, get_mongo
+from tools import JSONEncoder
 
 
 @app.route('/dataSources')
 def get_data_sources():
-    return jsonify(data)
+
+    sources = get_mongo().db.dataSources.find({})
+    return JSONEncoder.JSONEncoder().encode(list(sources))

@@ -16,6 +16,7 @@ def get_mongo(uri=None):
         uri = os.getenv('MONGO', 'mongodb://localhost:27017/pk_7in14')
 
     if not mongo:
+        print('\t! creating new mongo connection using ' + uri)
         app.config['MONGO_URI'] = uri
         mongo = PyMongo(app)
     return mongo

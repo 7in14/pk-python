@@ -50,3 +50,20 @@ class GetDataSourceTestCase(unittest.TestCase):
 
         # assert
         self.assertEqual(http_response.status_code, 404)
+
+    def test_getDataSources(self):
+        # arrange
+        future = go(self.app.get, '/dataSources')
+        request = self.server.receives(
+            Command({"find": "dataSources", "filter": {}}, flags=4, namespace="app"))
+        request.ok(cursor={'id': 0, 'firstBatch': [
+            {'name': 'Google', 'url': 'http://google.com/rest/api'},
+            {'name': 'Rest', 'url': 'http://rest.com/rest/api'}]})
+
+        # act
+        http_response = future()
+
+        # assert
+        data = http_response.get_data(as_text=True)
+        self.assertIn('http://google.com/rest/api', data)
+        self.assertIn('http://rest.com/rest/api', data)
