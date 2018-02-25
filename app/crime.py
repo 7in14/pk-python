@@ -21,8 +21,8 @@ def crime():
 
 
 def filterbyvalue(seq, value):
-    for el in seq:
-        if not value or value in el['lcr_desc']:
-            el.pop('location', None)
-            el.pop('inc_no', None)
-            yield el
+    for crime in seq:
+        if not value or value in crime['lcr_desc']:
+            crime.pop('location', None)
+            crime.pop('inc_no', None)
+            yield crime

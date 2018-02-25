@@ -3,7 +3,7 @@ default: build
 build: install test
 
 test:
-	pytest --cov-report xml:coverage.xml --cov=app
+	pytest -v -s --cov-report xml:coverage.xml --cov=app
 
 install:
 	pip3 install -r requirements.txt
@@ -14,10 +14,12 @@ save:
 setup:
 	pip3 install pipreqs pytest pytest-cov
 
-venv:
+virt:
 	pip3 install virtualenv
 	virtualenv -p /usr/local/Cellar/python3/3.6.4_2/bin/python3.6 venv
-	source venv/bin/activate
+
+virt-start:
+	source ./venv/bin/activate
 
 run:
 	export FLASK_DEBUG=1
