@@ -9,7 +9,7 @@ app = Flask(__name__)
 mongo = None
 
 
-def get_Mongo(uri=None):
+def get_mongo(uri=None):
     global mongo
 
     if uri is None:
