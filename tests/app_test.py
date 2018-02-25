@@ -29,21 +29,6 @@ class AppTestCase(unittest.TestCase):
 
         self.assertIn(b'Simple python web app built with flask', response.data)
 
-    def test_crime(self):
-        response = self.app.get('/raleigh/crime')
-
-        self.assertEqual(response.status_code, 200)
-
-    def test_crimeWithQuery(self):
-        response = self.app.get('/raleigh/crime?query=Drug')
-
-        self.assertEqual(response.status_code, 200)
-
-    def test_allData(self):
-        response = self.app.get('/allData')
-
-        self.assertEqual(response.status_code, 200)
-
     def test_getDataSource_noId_404(self):
         response = self.app.get('/dataSource/')
 
