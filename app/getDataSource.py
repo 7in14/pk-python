@@ -1,4 +1,4 @@
-from app import app, getMongo
+from app import app, get_Mongo
 from tools import JSONEncoder
 from flask import jsonify, abort
 from bson.objectid import ObjectId
@@ -6,9 +6,9 @@ from bson.objectid import ObjectId
 
 
 @app.route('/dataSource/<string:id>')
-def getDataSource(id):
+def get_DataSource(id):
     if not id:
         abort(404)
 
-    source = getMongo().db.dataSources.find_one_or_404(ObjectId(id))
+    source = get_Mongo().db.dataSources.find_one_or_404(ObjectId(id))
     return JSONEncoder.JSONEncoder().encode(source)

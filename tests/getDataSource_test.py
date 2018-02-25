@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from app import app, getMongo
+from app import app, get_Mongo
 from mockupdb import MockupDB, go, Command
 from pymongo import MongoClient
 from mockupdb._bson import ObjectId as mockup_oid
@@ -13,8 +13,8 @@ class GetDataSourceTestCase(unittest.TestCase):
         self.server = MockupDB(auto_ismaster=True, verbose=True)
         self.server.run()
         # create mongo connection to mock server
-        print('calling getMongo with ' + self.server.uri)
-        client = getMongo(self.server.uri)
+        print('calling get_Mongo with ' + self.server.uri)
+        client = get_Mongo(self.server.uri)
 
         app.testing = True
         self.app = app.test_client()

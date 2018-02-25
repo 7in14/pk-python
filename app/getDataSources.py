@@ -14,5 +14,5 @@ data = [
 
 
 @app.route('/dataSources')
-def getDataSources():
+def get_DataSources():
     return jsonify(data)
