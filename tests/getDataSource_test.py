@@ -1,9 +1,11 @@
 import unittest
 import os
 
-from pytest_mongodb import plugin
 from app import app, getMongo
-from mockupdb import MockupDB
+from mockupdb import MockupDB, go, Command
+from pymongo import MongoClient
+from mockupdb._bson import ObjectId as mockup_oid
+
 
 class GetDataSourceTestCase(unittest.TestCase):
 
@@ -12,7 +14,7 @@ class GetDataSourceTestCase(unittest.TestCase):
         self.server.run()
         # create mongo connection to mock server
         print('calling getMongo with ' + self.server.uri)
-        getMongo(self.server.uri)
+        client = getMongo(self.server.uri)
 
         app.testing = True
         self.app = app.test_client()
@@ -21,6 +23,16 @@ class GetDataSourceTestCase(unittest.TestCase):
         self.server.stop()
 
     def test_getDataSource(self):
-        response = self.app.get('/dataSource/5a8f1e368f7936badfbb0cfa')
+        future = go(self.app.get, '/dataSource/5a8f1e368f7936badfbb0cfa')
+        # request = self.server.receives(
+        #     Command({'find': 'dataSources', 'filter': {'_id': {'$oid': mockup_oid('5a8f1e368f7936badfbb0cfa')}}, 'limit': 1, 'singleBatch': True}, flags=4, namespace='app'))
 
-        self.assertEqual(response.status_code, 404)
+        request = self.server.receives(
+            Command({"find": "dataSources", "filter": {"_id": mockup_oid('5a8f1e368f7936badfbb0cfa')}, "limit": 1, "singleBatch": True}, flags=4, namespace="app"))
+
+        request.ok(cursor={'id': 0, 'firstBatch': [
+            {'name': 'bla', 'url': 'http://google.com/rest/api'}]})
+        http_response = future()
+
+        self.assertIn('http://google.com/rest/api',
+                      http_response.get_data(as_text=True))

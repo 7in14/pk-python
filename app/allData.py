@@ -1,4 +1,4 @@
-from app import app
+from app import app, getDataSources
 from flask import jsonify
 import requests
 

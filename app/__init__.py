@@ -8,18 +8,18 @@ app = Flask(__name__)
 
 mongo = None
 
-def getMongo(uri = None):
+
+def getMongo(uri=None):
     global mongo
-    print('getting mongo for ' + str(uri))
 
     if uri is None:
         uri = os.getenv('MONGO', 'mongodb://localhost:27017/pk_7in14')
 
     if not mongo:
-        print('Mongo doest exist - creating new connection')
         app.config['MONGO_URI'] = uri
         mongo = PyMongo(app)
     return mongo
+
 
 from app import hello
 from app import ping
