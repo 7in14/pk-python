@@ -3,7 +3,7 @@ from flask import jsonify, abort, request
 
 
 @app.route('/dataSource', methods=['PUT'])
-def add_dataSource():
+def add_data_source():
 
     if not request.json or not 'url' in request.json or not 'name' in request.json:
         abort(400)

@@ -16,7 +16,7 @@ data = [
 
 
 @app.route('/allData')
-def get_allData():
+def get_all_data():
 
     # todo: async/await ?
     allData = list(get_data(data))

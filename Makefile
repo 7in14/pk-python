@@ -23,4 +23,4 @@ virt-start:
 
 run:
 	export FLASK_DEBUG=1
-	python hello.py
+	python app.py

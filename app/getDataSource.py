@@ -6,7 +6,7 @@ from bson.objectid import ObjectId
 
 
 @app.route('/dataSource/<string:id>')
-def get_dataSource(id):
+def get_data_source(id):
     if not id:
         abort(404)
 

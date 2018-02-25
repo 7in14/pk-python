@@ -3,8 +3,10 @@ from flask import request, jsonify
 import requests
 
 # GET /raleigh/crime?query=<q> JSON
-# Calls Open Data Endpoint for Raleigh and filters crimes by matching the provided query.
-# Data URL to use:https://data.raleighnc.gov/Police/Daily-Police-Incidents/guyh-emm5
+# Calls Open Data Endpoint for Raleigh and filters crimes by
+# matching the provided query.
+# Data URL to use:
+# https://data.raleighnc.gov/Police/Daily-Police-Incidents/guyh-emm5
 
 
 @app.route('/raleigh/crime')
