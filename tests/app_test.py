@@ -1,6 +1,7 @@
 import unittest
 
 from app import app
+from json import dumps
 
 
 class AppTestCase(unittest.TestCase):
@@ -43,10 +44,19 @@ class AppTestCase(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-    def test_getDataSource_no_id(self):
+    def test_getDataSource_noId_404(self):
         response = self.app.get('/dataSource/')
 
         self.assertEqual(response.status_code, 404)
+
+    def test_addDataSources_badData_400(self):
+        # arrange
+        headers = [('Content-Type', 'application/json')]
+        toInsert = {'url': 'http://google.com'}
+        response = self.app.put(
+            '/dataSource', data=dumps(toInsert), headers=headers)
+
+        self.assertEqual(response.status_code, 400)
 
 
 if __name__ == '__main__':

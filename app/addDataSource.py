@@ -1,5 +1,7 @@
-from app import app
+from app import app, get_mongo
 from flask import jsonify, abort, request
+from tools import JSONEncoder
+from bson.objectid import ObjectId
 
 
 @app.route('/dataSource', methods=['PUT'])
@@ -11,4 +13,12 @@ def add_data_source():
         'name': request.json['name'],
         'url': request.json['url']
     }
-    return jsonify(dataSource), 201
+
+    _id = request.json.get('_id', None)
+
+    if _id is not None:
+        dataSource['_id'] = ObjectId(_id)
+
+    result = get_mongo().db.dataSources.insert_one(dataSource)
+
+    return JSONEncoder.JSONEncoder().encode(result.inserted_id), 201
