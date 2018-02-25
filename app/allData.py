@@ -29,7 +29,7 @@ def get_data(dataSources):
         r = requests.get(dataSource['url'])
         json = r.json()
 
-        yidataSourced {
+        yield {
             'name': dataSource['name'],
             'data': json
         }
