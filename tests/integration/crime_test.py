@@ -9,15 +9,15 @@ from app import app
 class CrimeTestCase(unittest.TestCase):
 
     crimeData = [{
-        "district": "SOUTHEAST",
-        "inc_datetime": "2018-02-02T00:00:00.000",
-        "lcr": "71A",
-        "lcr_desc": "Traffic/DWI (Driving While Impaired)",
+        'district': 'SOUTHEAST',
+        'inc_datetime': '2018-02-02T00:00:00.000',
+        'lcr': '71A',
+        'lcr_desc': 'Traffic/DWI (Driving While Impaired)',
     }, {
-        "district": "SOUTHWEST",
-        "inc_datetime": "2018-02-02T00:39:00.000",
-        "lcr": "54D",
-        "lcr_desc": "Drug Violation/Misdemeanor",
+        'district': 'SOUTHWEST',
+        'inc_datetime': '2018-02-02T00:39:00.000',
+        'lcr': '54D',
+        'lcr_desc': 'Drug Violation/Misdemeanor',
     }]
 
     def json_of_response(self, response):

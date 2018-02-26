@@ -71,21 +71,42 @@ class GetDataSourceTestCase(unittest.TestCase):
 
     def test_addDataSource(self):
         # arrange
+        id = '5a924d7a29a6e5484dcf68be'
         headers = [('Content-Type', 'application/json')]
         #   need to pass _id because pymongo creates one so it's impossible to match insert request without _ids
         toInsert = {'name': 'new', 'url': 'http://google.com',
-                    '_id': '5a924d7a29a6e5484dcf68be'}
+                    '_id': id}
         future = go(self.app.put, '/dataSource',
                     data=dumps(toInsert), headers=headers)
         request = self.server.receives(
             Command({'insert': 'dataSources', 'ordered': True, 'documents': [{'name': 'new', 'url': 'http://google.com',
-                                                                              '_id': mockup_oid('5a924d7a29a6e5484dcf68be')}]}, namespace='app'))
-        request.ok(cursor={'inserted_id': '5a924d7a29a6e5484dcf68be'})
+                                                                              '_id': mockup_oid(id)}]}, namespace='app'))
+        request.ok(cursor={'inserted_id': id})
 
         # act
         http_response = future()
 
         # assert
         data = http_response.get_data(as_text=True)
-        self.assertIn('5a924d7a29a6e5484dcf68be', data)
+        self.assertIn(id, data)
         self.assertEqual(http_response.status_code, 201)
+
+    def test_deleteDataSource(self):
+        # arrange
+        id = '5a8f1e368f7936badfbb0cfa'
+        future = go(self.app.delete, f'/dataSource/{id}')
+        request = self.server.receives(
+            Command({'delete': 'dataSources', 'ordered': True, 'deletes': [{'q': {'_id': mockup_oid(id)}, 'limit': 1}]}, namespace='app'))
+        request.ok({'acknowledged': True, 'n': 1})
+
+        # ackwoledged:  True
+        # 	raw_result:  {'n': 1, 'ok': 1.0}
+        # 	deleted_count:  1
+
+        # act
+        http_response = future()
+
+        # assert
+        self.assertIn(f'deleted {id}',
+                      http_response.get_data(as_text=True))
+        self.assertEqual(http_response.status_code, 202)
