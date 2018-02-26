@@ -1,4 +1,6 @@
 import unittest
+from app.dataAccess.mongoData import mongoData
+
 from unittest.mock import Mock, patch
 
 from app import app
@@ -16,10 +18,12 @@ class AllDataTestCase(unittest.TestCase):
         pass
 
     @patch('app.allData.requests.get')
-    def test_allDataMocked(self, mock_get):
+    @patch.object(mongoData, 'get_all')
+    def test_allDataMocked(self, mock_getAll, mock_get):
         # arrange
         mock_get.return_value = Mock(ok=True)
         mock_get.return_value.json.return_value = {'some': 'data'}
+        mock_getAll.return_value = [{'url':'http://mock-server.com/rest/api', 'name': 'mock'}]
 
         # act
         response = self.app.get('/allData')

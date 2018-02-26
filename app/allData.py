@@ -1,24 +1,17 @@
-from app import app, getDataSources
+from app import app, get_mongo
+from app.dataAccess.mongoData import mongoData
+
 from flask import jsonify
 import requests
-
-
-data = [
-    {
-        'name': u'US States',
-        'url': u'http://services.groupkt.com/state/get/USA/all'
-    },
-    {
-        'name': u'JSON placeholder',
-        'url': u'https://jsonplaceholder.typicode.com/users',
-    }
-]
 
 
 @app.route('/allData')
 def get_all_data():
 
     # todo: async/await ?
+    # todo: use ray?
+    db = mongoData(get_mongo())
+    data = db.get_all()
     allData = list(get_data(data))
     return jsonify(allData)
 
