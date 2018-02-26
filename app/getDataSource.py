@@ -1,12 +1,14 @@
 from app import app, get_mongo
+from app.dataAccess.mongoData import mongoData
 from tools import JSONEncoder
-from flask import jsonify, abort
+
+from flask import abort
 from bson.objectid import ObjectId
-# todo: switch to async await ? https://github.com/xzased/pytest-async-mongodb
 
 
 @app.route('/dataSource/<string:id>')
 def get_data_source(id):
 
-    source = get_mongo().db.dataSources.find_one_or_404(ObjectId(id))
+    db = mongoData(get_mongo())
+    source = db.get_one(id)
     return JSONEncoder.JSONEncoder().encode(source)

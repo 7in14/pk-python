@@ -92,3 +92,4 @@ curl .:5000/allData
 # todo
 * switch to quart https://gitlab.com/pgjones/quart
  * [migration to quart](https://pgjones.gitlab.io/quart/flask_migration.html)
+* todo: switch to async await ? https://github.com/xzased/pytest-async-mongodb
