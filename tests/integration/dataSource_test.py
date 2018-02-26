@@ -27,9 +27,10 @@ class GetDataSourceTestCase(unittest.TestCase):
 
     def test_getDataSource(self):
         # arrange
-        future = go(self.app.get, '/dataSource/5a8f1e368f7936badfbb0cfa')
+        id = '5a8f1e368f7936badfbb0cfa'
+        future = go(self.app.get, f'/dataSource/{id}')
         request = self.server.receives(
-            Command({'find': 'dataSources', 'filter': {'_id': mockup_oid('5a8f1e368f7936badfbb0cfa')}, 'limit': 1, 'singleBatch': True}, flags=4, namespace='app'))
+            Command({'find': 'dataSources', 'filter': {'_id': mockup_oid(id)}, 'limit': 1, 'singleBatch': True}, flags=4, namespace='app'))
         request.ok(cursor={'id': 0, 'firstBatch': [
             {'name': 'bla', 'url': 'http://google.com/rest/api'}]})
 
@@ -41,9 +42,10 @@ class GetDataSourceTestCase(unittest.TestCase):
                       http_response.get_data(as_text=True))
 
     def test_getDataSource_404(self):
-        future = go(self.app.get, '/dataSource/5a8f1e368f7936badfbb0cfb')
+        id = '5a8f1e368f7936badfbb0cfb'
+        future = go(self.app.get, f'/dataSource/{id}')
         request = self.server.receives(
-            Command({'find': 'dataSources', 'filter': {'_id': mockup_oid('5a8f1e368f7936badfbb0cfb')}, 'limit': 1, 'singleBatch': True}, flags=4, namespace='app'))
+            Command({'find': 'dataSources', 'filter': {'_id': mockup_oid(id)}, 'limit': 1, 'singleBatch': True}, flags=4, namespace='app'))
         request.ok(cursor={'id': 0, 'firstBatch': []})
 
         # act
@@ -99,10 +101,6 @@ class GetDataSourceTestCase(unittest.TestCase):
             Command({'delete': 'dataSources', 'ordered': True, 'deletes': [{'q': {'_id': mockup_oid(id)}, 'limit': 1}]}, namespace='app'))
         request.ok({'acknowledged': True, 'n': 1})
 
-        # ackwoledged:  True
-        # 	raw_result:  {'n': 1, 'ok': 1.0}
-        # 	deleted_count:  1
-
         # act
         http_response = future()
 
@@ -110,3 +108,19 @@ class GetDataSourceTestCase(unittest.TestCase):
         self.assertIn(f'deleted {id}',
                       http_response.get_data(as_text=True))
         self.assertEqual(http_response.status_code, 202)
+
+    def test_deleteDataSource_notFound(self):
+        # arrange
+        id = '5a8f1e368f7936badfbb0000'
+        future = go(self.app.delete, f'/dataSource/{id}')
+        request = self.server.receives(
+            Command({'delete': 'dataSources', 'ordered': True, 'deletes': [{'q': {'_id': mockup_oid(id)}, 'limit': 1}]}, namespace='app'))
+        request.ok({'acknowledged': True, 'n': 0})
+
+        # act
+        http_response = future()
+
+        # assert
+        self.assertIn(f'{id} not found',
+                      http_response.get_data(as_text=True))
+        self.assertEqual(http_response.status_code, 404)

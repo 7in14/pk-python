@@ -34,6 +34,11 @@ class AppTestCase(unittest.TestCase):
 
         self.assertEqual(response.status_code, 404)
 
+    def test_deleteDataSource_noId_404(self):
+        response = self.app.delete('/dataSource/')
+
+        self.assertEqual(response.status_code, 404)
+
     def test_addDataSources_badData_400(self):
         # arrange
         headers = [('Content-Type', 'application/json')]
