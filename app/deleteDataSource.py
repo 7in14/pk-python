@@ -5,8 +5,6 @@ from bson.objectid import ObjectId
 
 @app.route('/dataSource/<string:id>', methods=['DELETE'])
 def delete_data_source(id):
-    if not id:
-        abort(404, 'id not provided')
 
     result = get_mongo().db.dataSources.delete_one({'_id': ObjectId(id)})
 
