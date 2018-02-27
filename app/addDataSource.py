@@ -9,7 +9,7 @@ from bson.objectid import ObjectId
 @app.route('/dataSource', methods=['PUT'])
 def add_data_source():
 
-    if not request.json or not 'url' in request.json or not 'name' in request.json:
+    if not request.json or 'url' not in request.json or 'name' not in request.json:
         abort(400, f'provided json payload was not correct: {request.json}')
     dataSource = {
         'name': request.json['name'],
