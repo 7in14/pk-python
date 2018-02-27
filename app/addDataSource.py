@@ -1,4 +1,4 @@
-from app import app, get_mongo
+from app import app
 from app.dataAccess.mongoData import mongoData
 
 from flask import abort, request
@@ -21,7 +21,7 @@ def add_data_source():
     if _id is not None:
         dataSource['_id'] = ObjectId(_id)
 
-    db = mongoData(get_mongo())
+    db = mongoData(app)
     result = db.add_one(dataSource)
 
     return JSONEncoder.JSONEncoder().encode(result.inserted_id), 201

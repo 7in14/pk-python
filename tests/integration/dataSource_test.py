@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from app import app, get_mongo
+from app import app
 from app.dataAccess.mongoData import mongoData
 
 from mockupdb import MockupDB, go, Command
@@ -18,10 +18,9 @@ class GetDataSourceTestCase(unittest.TestCase):
         self.server = MockupDB(auto_ismaster=True, verbose=True)
         self.server.run()
         # create mongo connection to mock server
-        print('calling get_mongo with ' + self.server.uri)
-        client = get_mongo(self.server.uri)
 
         app.testing = True
+        app.config['MONGO_URI'] = self.server.uri
         self.app = app.test_client()
 
     @classmethod
@@ -134,7 +133,8 @@ class GetDataSourceTestCase(unittest.TestCase):
         # arrange
         mock_get.return_value = Mock(ok=True)
         mock_get.return_value.json.return_value = {'some': 'data'}
-        mock_getAll.return_value = [{'url':'http://mock-server.com/rest/api', 'name': 'mock'}]
+        mock_getAll.return_value = [
+            {'url': 'http://mock-server.com/rest/api', 'name': 'mock'}]
 
         # act
         response = self.app.get('/allData')

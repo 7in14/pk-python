@@ -1,4 +1,4 @@
-from app import app, get_mongo
+from app import app
 from app.dataAccess.mongoData import mongoData
 
 from flask import jsonify
@@ -12,7 +12,7 @@ def get_all_data():
 
     # todo: async/await ?
     # todo: use ray?
-    db = mongoData(get_mongo())
+    db = mongoData(app)
     data = db.get_all()
     allData = list(get_data(data))
     return jsonify(allData)

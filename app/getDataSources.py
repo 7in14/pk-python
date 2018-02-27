@@ -1,4 +1,4 @@
-from app import app, get_mongo
+from app import app
 from app.dataAccess.mongoData import mongoData
 from tools import JSONEncoder
 
@@ -6,6 +6,6 @@ from tools import JSONEncoder
 @app.route('/dataSources')
 def get_data_sources():
 
-    db = mongoData(get_mongo())
+    db = mongoData(app)
     sources = db.get_all()
     return JSONEncoder.JSONEncoder().encode(list(sources))
