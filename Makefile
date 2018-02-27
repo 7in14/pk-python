@@ -1,6 +1,11 @@
+SHELL := /bin/zsh
+
 default: build
 
+init: setup virt build
+
 build: install test
+
 
 test:
 	pytest -v -s --cov-report xml:coverage.xml --cov=app
@@ -17,8 +22,6 @@ setup:
 virt:
 	pip3 install virtualenv
 	virtualenv -p /usr/local/Cellar/python3/3.6.4_2/bin/python3.6 venv
-
-virt-start:
 	source ./venv/bin/activate
 
 run:
