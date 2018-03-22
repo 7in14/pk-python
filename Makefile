@@ -1,4 +1,5 @@
-SHELL := /bin/zsh
+# uncomment to make virt command work :/
+# SHELL := /bin/zsh
 
 default: build
 
