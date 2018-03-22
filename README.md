@@ -5,13 +5,13 @@ Simple python web app built with flask
 ## To run with flask
 Export app name first
 ```
-$ export FLASK_APP=hello.py
+$ export FLASK_APP=app.py
 ```
 ## To run with Python
 ```
-python hello.py
+python app.py
 ```
-That's to this code in `hello.py`
+That's to this code in `app.py`
 ```
 if __name__ == '__main__':
     app.run(debug=False,host='0.0.0.0')
